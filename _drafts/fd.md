@@ -82,6 +82,11 @@ Well, a quick google search reminds us that there are three standard file descri
 You probably already see where this is going...
 
 **Solution**:
-We essentially have control over the file descriptor for this program, since it is our input that determines what ‘fd’ is assigned to (aside from the - 0x1234). Passing 4660 (0x1234 in decimal) as our cmd line arg allows read() to look at stdin for the data to store in ‘buf’, so we can easily make our conditional true by typing‘LETMEWIN’.
+You see, since 'fd' is assigned a value of our choice - 0x1234:
+
+```c
+int fd = atoi( argv[1] ) - 0x1234;
+```
+we essentially have control over the file descriptor used to read data into 'buf'. Passing 4660 (0x1234 in decimal) as our cmd line arg allows read() to look at stdin for the data to store in ‘buf’, so we can easily make our conditional true by typing‘LETMEWIN’.
 
 ![fd flag](/assets/CTF/pwnable/fd/fd_flag.jpg)
