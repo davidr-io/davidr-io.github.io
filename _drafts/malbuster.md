@@ -94,7 +94,7 @@ _capa report for malbuster_1_
 **Question 12**: Which binary contains the string GodMode?
 <br>
 
-**Answer 12**: On Linux we can just use strings *file* | grep GodMode, but on Windows we'll have to use the *strings.exe* tool. We can redirect the output to str_x files, open them in Vim, and perform a quick search to find our answer. Malbuster_2
+**Answer 12**: On Linux we can just use strings *file* and grep GodMode, but on Windows we'll have to use the *strings.exe* tool. We can redirect the output to str_x files, open them in Vim, and perform a quick search to find our answer. Malbuster_2
 
 **Question 13**: Which binary contains the string **Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)**?
 <br>
