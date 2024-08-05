@@ -3,6 +3,10 @@
 # Import the theme
 theme: jekyll-theme-chirpy
 
+plugins:
+  - jekyll-compose
+
+
 # The language of the webpage › http://www.lingoes.net/en/translator/langcode.htm
 # If it has the same name as one of the files in folder `_data/locales`, the layout language will also be changed,
 # otherwise, the layout language will use the default value of 'en'.
@@ -16,7 +20,8 @@ timezone: America/New_York
 
 title: davidr-io # the main title
 
-tagline: Welcome to my blog.  # it will display as the sub-title
+tagline: Welcome to my personal site, where I plan to share writeups and blogs. Probably some other random stuff, too. 
+
 
 description: >- # used by seo meta and the atom feed
   This is a blog for future writeups on CTFs, RE, and Malware samples.
