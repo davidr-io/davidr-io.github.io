@@ -3,6 +3,7 @@ layout: post
 title: Introducing myself and file descriptors
 categories: [CTF, pwnable]
 tags: [CTF]
+pin: true
 ---
 ---
 Introducing myself and a short CTF writeup
@@ -81,7 +82,7 @@ Well, a quick google search reminds us that there are three standard file descri
 
 You probably already see where this is going...
 
-**Solution**:
+#### **Solution**:
 You see, since 'fd' is assigned a value of our choice - 0x1234:
 
 ```c
