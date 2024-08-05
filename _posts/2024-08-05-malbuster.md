@@ -7,7 +7,7 @@ categories:
 tags:
 - CTF
 date: 2024-08-05 11:07 -0400
-image: /assets/CTF/thm/malbuster/malware.jpg
+image: /assets/ctf/thm/malbuster/malware.jpg
 ---
 This is my first TryHackMe room writeup published on this blog. While I am used to keeping detailed notes for my own refrence, I am still learning how to convey them in a way that is engaging and informative for the reader. If you have any tips or reccomendations, please don't hesitate to reach out to me on LinkedIn!
 
@@ -57,8 +57,7 @@ I personally used FLARE VM for this since I am most comfortable with some of the
 
 **Question 8**: What is the message found in the DOS_STUB of malbuster_4?
 
-
-
+![Desktop View](/assets/ctf/thm/malbuster/pe-bear.jpg){: .right }
 
 **Answer 8**: Using PEstudio, the DOS stub message field yields 'N/A'. We can use PE-bear to take a closer look at it using the raw hex from the header. The message is '!This Salfram cannot be run in DOS mode.'
 
@@ -68,6 +67,7 @@ I personally used FLARE VM for this since I am most comfortable with some of the
 
 **Question 10**: Using capa, how many anti-VM instructions were identified in malbuster_1?
 *note*: if you haven't used capa, it's a quick way to analyze and identify capabilities an executable has. 
+![Desktop View](/assets/ctf/thm/malbuster/capa.jpg){: .right }
 **Answer 10**: 3
 
 **Question 11**: Using capa, what is the MITRE ID of the DISCOVERY technique used by malbuster_4?
