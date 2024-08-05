@@ -14,10 +14,10 @@ Introducing myself and a short CTF writeup
 {: .prompt-warning}
 
 
-##### **Introduction** 
+## **Introduction** 
 Hello, my name is David. I am a senior Computer Science student who, like most who will probably read this, spend way too much time on computers. I have found myself increasingly interested in research and take way too many notes to not have somewhere to share them with the world. I think it's time to create somewhere to talk about these things that excite me with hopes that they will excite you, too. Enough about me, but if you'd like to connect, feel free to add me on LinkedIn. Today I am going to do a writeup on a fairly easy room from [pwnable](https://pwnable.kr). I did this room toward the beginning of this summer and I personally really enjoyed the bite (or byte) sized challenge it offered. Without further ado,
 
-##### **Challenge Description**
+### **Challenge Description**
 This room is designed to be a perfect introduction (or refresher) to file descriptors in Linux. In a nutshell, a file descriptor is a small, unsigned integer that uniquely identifies an open file within a process. As you probably know, everything in Linux is treated as a file, including our beloved stdin and stdout. 
 
 **'Mommy! what is a file descriptor in Linux?'**
