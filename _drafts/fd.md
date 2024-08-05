@@ -4,7 +4,6 @@ title: Introducing myself and file descriptors
 categories: [CTF, pwnable]
 tags: [CTF]
 ---
-
 ---
 Introducing myself and a short CTF writeup
 ---
@@ -14,7 +13,7 @@ Introducing myself and a short CTF writeup
 
 
 ##### **Introduction:** 
-Hello, my name is David. I am a senior Computer Science student who, like most who will probably read this, spend way too much time on computers. I have found myself increasingly interested in research and take way too many notes to not have somewhere to share them with the world. I think it's time to create somewhere to talk about these things that excite me with hopes that they will excite you, too. Enough about me, but if you'd like to connect, please add me on LinkedIn. Today I am going to do a writeup on a fairly easy room from [pwnable](https://pwnable.kr). I did this room toward the beginning of this summer and I personally really enjoyed the bite (or byte) sized challenge it offered. Without further ado,
+Hello, my name is David. I am a senior Computer Science student who, like most who will probably read this, spend way too much time on computers. I have found myself increasingly interested in research and take way too many notes to not have somewhere to share them with the world. I think it's time to create somewhere to talk about these things that excite me with hopes that they will excite you, too. Enough about me, but if you'd like to connect, feel free to add me on LinkedIn. Today I am going to do a writeup on a fairly easy room from [pwnable](https://pwnable.kr). I did this room toward the beginning of this summer and I personally really enjoyed the bite (or byte) sized challenge it offered. Without further ado,
 
 ##### **Challenge Description**: 
 This room is designed to be a perfect introduction (or refresher) to file descriptors in Linux. In a nutshell, a file descriptor is a small, unsigned integer that uniquely identifies an open file within a process. As you probably know, everything in Linux is treated as a file, including our beloved stdin and stdout. 
@@ -63,9 +62,17 @@ The `read()` function is a system call in the standard C library. A quick descri
 More information on `read()` can be found here –> [here](https://www.man7.org/linux/man-pages/man2/read.2.html)
 
 
-Consequently, we have a conditional that compares our 'buf' with 'LETMEWIN\n', and only if they are equal can we have our flag. 
+Consequently, we have a conditional that compares our 'buf' with 'LETMEWIN\n':
+```c
+if(!strcmp("LETMEWIN\n", buf)){
+		printf("good job :)\n");
+		system("/bin/cat flag");
+		exit(0);
+	}
+```
+and only when they are equal can we retrieve the flag.
 
-Alright, easy enough. We are going to read from file descriptor 'fd' into 'buf' for 'count' number of bytes, but how do we know which file contains our 'LETMEWIN\n' value?
+Alright, easy enough. We are going to read from file descriptor 'fd' into 'buf' for 'count' number of bytes. But how do we know which file contains our 'LETMEWIN\n' value?
 
 Well, a quick google search reminds us that there are three standard file descriptors in Linux:
 - Standard Input (stdin) : 0
@@ -75,6 +82,6 @@ Well, a quick google search reminds us that there are three standard file descri
 You probably already see where this is going...
 
 **Solution**:
-We essentially have control over the file descriptor for this program, since it is our input that determines what 'fd' is assigned to (aside from the - 0x1234). Passing 4660 (0x1234 in decimal) as our cmd line arg allows read() to look at stdin for the data to store in 'buf', so we can easily make our conditional true with 'LETMEWIN'.
+We essentially have control over the file descriptor for this program, since it is our input that determines what ‘fd’ is assigned to (aside from the - 0x1234). Passing 4660 (0x1234 in decimal) as our cmd line arg allows read() to look at stdin for the data to store in ‘buf’, so we can easily make our conditional true by typing‘LETMEWIN’.
 
 ![fd flag](/assets/CTF/pwnable/fd/fd_flag.jpg)
