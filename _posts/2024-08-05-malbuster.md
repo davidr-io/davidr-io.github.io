@@ -6,7 +6,7 @@ categories:
 - TryHackMe
 tags:
 - CTF
-image: "/assets/CTF/tryhackme/malbuster/malware.jpg"
+image: "assets/CTF/tryhackme/malbuster/malware.jpg"
 date: 2024-08-05 11:07 -0400
 ---
 
