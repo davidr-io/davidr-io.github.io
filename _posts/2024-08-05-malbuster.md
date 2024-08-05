@@ -6,7 +6,7 @@ categories:
 - TryHackMe
 tags:
 - CTF
-image: "assets/CTF/tryhackme/malbuster/malware.jpg"
+image: "/assets/CTF/tryhackme/malbuster/malware.jpg"
 date: 2024-08-05 11:07 -0400
 ---
 This is my first TryHackMe room writeup published on this blog. While I am used to keeping detailed notes for my own refrence, I am still learning how to convey them in a way that is engaging and informative for the reader. If you have any tips or reccomendations, please don't hesitate to reach out to me on LinkedIn!
