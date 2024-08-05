@@ -6,7 +6,7 @@ categories:
 - TryHackMe
 tags:
 - CTF
-image: "/assets/CTF/tryhackme/malbuster/malware.jpg"
+image: "assets/CTF/tryhackme/malbuster/malware.jpg"
 date: 2024-08-05 11:07 -0400
 ---
 
@@ -58,7 +58,7 @@ I personally used FLARE VM for this since I am most comfortable with some of the
 
 **Question 8**: What is the message found in the DOS_STUB of malbuster_4?
 <div style="float: right; margin-left: 20px;">
-  <img src="{{ site.baseurl }}/assets/CTF/tryhackme/malbuster/pe-bear.jpg" alt="pe-bear" width="300px">
+  <img src="{{ site.baseurl }}assets/CTF/tryhackme/malbuster/pe-bear.jpg" alt="pe-bear" width="300px">
   <div style="display: block;">Figure 1: pe-bear</div>
 </div>
 
@@ -68,7 +68,7 @@ I personally used FLARE VM for this since I am most comfortable with some of the
 **Answer 9**: Looking at the 'imports' tab in PEstudio, it seems that the function names are displayed as ordinal values. This makes it a bit more challenging for us to find this function by name. We can throw this file into Ghidra to get a better view of the imports/exports. Looking at the Symbol Tree > Imports, we see a DLL import named 'Shell32.DLL'. This is our library in question. 
 
 <div style="float: right; margin-left: 20px;">
-  <img src="{{ site.baseurl }}/assets/CTF/tryhackme/malbuster/capa.jpg" alt="capa.jpg" width="300px">
+  <img src="{{ site.baseurl }}assets/CTF/tryhackme/malbuster/capa.jpg" alt="capa.jpg" width="300px">
   <div style="display: block;">Figure 1: capa</div>
 </div>
 
