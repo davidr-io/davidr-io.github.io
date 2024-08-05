@@ -56,7 +56,7 @@ I personally used FLARE VM for this since I am most comfortable with some of the
 **Answer 7**: Zloader
 
 **Question 8**: What is the message found in the DOS_STUB of malbuster_4?
-![Desktop View](/assets/CTF/tryhackme/MalBuster/pe-bear.jpg){: .right }
+![Desktop View](/assets/CTF/tryhackme/malbuster/pe-bear.jpg){: .right }
 
 
 
