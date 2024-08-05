@@ -6,7 +6,7 @@ categories:
 - TryHackMe
 tags:
 - CTF
-image: "assets/CTF/tryhackme/malbuster/malware.jpg"
+image: "/assets/CTF/tryhackme/malbuster/malware.jpg"
 date: 2024-08-05 11:07 -0400
 ---
 
@@ -57,10 +57,9 @@ I personally used FLARE VM for this since I am most comfortable with some of the
 **Answer 7**: Zloader
 
 **Question 8**: What is the message found in the DOS_STUB of malbuster_4?
-<div style="float: right; margin-left: 20px;">
-  <img src="assets/CTF/tryhackme/malbuster/pe-bear.jpg" alt="pe-bear" width="300px">
-  <div style="display: block;">Figure 1: pe-bear</div>
-</div>
+![Desktop View](/assets/CTF/tryhackme/MalBuster/pe-bear.jpg){: .right }
+
+
 
 
 **Answer 8**: Using PEstudio, the DOS stub message field yields 'N/A'. We can use PE-bear to take a closer look at it using the raw hex from the header. The message is '!This Salfram cannot be run in DOS mode.'
@@ -68,10 +67,6 @@ I personally used FLARE VM for this since I am most comfortable with some of the
 **Question 9**: malbuster_4 imports the function ShellExecuteA. From which DLL file does it import this function?
 **Answer 9**: Looking at the 'imports' tab in PEstudio, it seems that the function names are displayed as ordinal values. This makes it a bit more challenging for us to find this function by name. We can throw this file into Ghidra to get a better view of the imports/exports. Looking at the Symbol Tree > Imports, we see a DLL import named 'Shell32.DLL'. This is our library in question. 
 
-<div style="float: right; margin-left: 20px;">
-  <img src="assets/CTF/tryhackme/malbuster/capa.jpg" alt="capa" width="300px">
-  <div style="display: block;">Figure 2: capa report</div>
-</div>
 
 **Question 10**: Using capa, how many anti-VM instructions were identified in malbuster_1?
 *note*: if you haven't used capa, it's a quick way to analyze and identify capabilities an executable has. 
