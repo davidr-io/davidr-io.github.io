@@ -24,6 +24,7 @@ I really enjoy discussing these types of challenges, even though some of them ca
 <br>
 I am in the first chapter of this book as I mainly read it when I am not working on a CTF/course/school, but I wanted to create somewhere to track my progress through the book. Here are the challenges I have completed so far: 
 
+Level 1:
 - [Challenge 48](https://challenges.re/48/)
 - [Challenge 49](https://challenges.re/49/)
 
