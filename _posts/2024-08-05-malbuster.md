@@ -1,7 +1,7 @@
 ---
 layout: post
 title: MalBuster - Introductory Static Analysis
-categories: [tryhackme, malware]
+categories: [tryhackme, malware analysis]
 tags: [CTF, malware]
 date: 2024-08-05 11:07 -0400
 image: /assets/CTF/thm/malbuster/malware.jpg
