@@ -2,10 +2,10 @@
 layout: post
 title: RE4B Progress Tracker
 categories:
-- Reverse Engineering
+- reverse engineering
 - RE4B
 tags:
-- Reverse Engineering
+- reverse engineering
 - CTF
 image: "/assets/CTF/re4b/re4b.png"
 date: 2024-08-13 23:34 -0400
