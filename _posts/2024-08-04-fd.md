@@ -3,7 +3,7 @@ layout: post
 title: Introducing myself and file descriptors
 categories: [pwnable, file descriptors]
 tags: [CTF, C, Linux]
-pin: true
+pin: false
 image: /assets/CTF/pwnable/fd/file_desc.jpg
 ---
 ---
