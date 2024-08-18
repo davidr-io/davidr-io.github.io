@@ -7,7 +7,6 @@ categories:
 tags:
 - reverse engineering
 - x86-64
-pin: true
 image: "/assets/CTF/CMU_BB/computer.jpg"
 ---
 ### Phase 5!
