@@ -8,6 +8,7 @@ tags:
 - reverse engineering
 - x86-64
 image: "/assets/CTF/CMU_BB/computer.jpg"
+date: 2024-08-17 16:34 -0400
 ---
 ### Phase 5!
 
@@ -21,11 +22,11 @@ Let's begin!
 ![phase_5_asm](/assets/CTF/CMU_BB/phase_5/func_5_asm.png)
 ![phase_5_asm2](/assets/CTF/CMU_BB/phase_5/func_5_asm2.png)
 
-Looking at our assembly, we can immediately start dissecting the relevant information
+Looking at the assembly, we can immediately start dissecting the relevant information
 
-We have a call to ```sscanf()```, let's find out what kind of input this function is expecting
+There is a call to ```sscanf()```, let's find out what kind of input this function is expecting
 
-We will do this the same as the last few phases, by analyzing the memory being loaded into ```rdx``` before we call ```sscanf()```
+Let's take the same steps as the last few phases, by analyzing the memory being loaded into ```rdx``` before we call ```sscanf()```
 
 ![sscanf format string in memory](/assets/CTF/CMU_BB/phase_5/scanf_format_string_in_memory.png)
 
@@ -65,26 +66,24 @@ mov dword ptr [rbp+24h], eax
 
 It seems like we have some control flow based on the move from memory into ```eax```, followed by increment and a move back into memory. It's probably halfway safe to assume this is a counter of some sort. 
 
-WE then see what looks like an array indexing going on and moved into ```eax```, and then moved into the memory of our initial input1. 
+Based on the pointer notation, it seems we are indexing a value from an array and moving it into ```eax```, and then moving it into the memory of our initial input1. 
 
-We then add this with the value stored in [rbp+24h], and move it back into [rbp+24h]. This looks like a x = x+y for each time we loop. Let's put this into Ghidra and take a closer look, as we need to find out what is being indexed in memory
+This is added with the value stored in [rbp+24h], and moved back into [rbp+24h]. This looks like a x = x+y for each iteration of the loop. Let's put this into Ghidra and take a closer look, as we need to find out what is being indexed in memory
 
-*Note:* I've changed some variable names and added comments for readbility
+*Note: I've changed some variable names and added comments for readbility*
 
 ![func_5_Ghidra](/assets/CTF/CMU_BB/phase_5/func5_ghidra.png)
 
-We have a decompiled view of what is going on now, let's dissect it
+Here I have a decompiled view of what is going on, now let's dissect it
 
-I will skip over the obvious, like checking if we have passed two integers in.
-
-At the top we have
+At the top of the function we have
 ```c
 uint buff_1[8];
 uint buff_2[8];
 ```
 which are the buffers ```sscanf()``` reads our input into
 
-After the boilerplate code we have our while loop
+Next we have a while loop
 
 ```c
 while (buff_1[0] != 0xf) {
@@ -94,9 +93,9 @@ while (buff_1[0] != 0xf) {
 }
 ```
 
-*Note:* moving forward, I am going to refer to ```buff_1[0]``` as `input1`. Same for the second input.
+*Note: moving forward, I am going to refer to ```buff_1[0]``` as `input1`. Same for the second input.*
 
-We want to loop until `input1` == 0xf, and for every iteration, our `counter` is incremented by 1. We then reassign `input1` to an address in memory
+Based on the above loop, it will loop until `input1` == 0xf, and for every iteration, our `counter` is incremented by 1. `input1` is the reassigned to a value in memory
 ```	c
 buff_1[0] = *(*uint)(&array+(longlong)(int)buff_1[0]*4);
 ```
@@ -117,7 +116,7 @@ if ((counter != 0xf) || (local_174 != buff_2[0])){
 }
 ```
 
-Meaning we must iterate exactly 15 times through this while loop since 
+Meaning the code must iterate exactly 15 times through the while loop since 
 ```c
 counter = 0;
 ```
@@ -133,11 +132,11 @@ buff_1[0] = *(*uint)(&array+(longlong)(int)buff_1[0]*4);
 ```
 to be assigned the value of `0xF` to exit the while loop. 
 
-Once we satisfy these conditions, we can pass the 
+Once we satisfy these conditions, we can then pass the 
 ```c
 local_174 != buff_2[0]
 ```
-check by checking the memory at that location when we successfully exit the loop, and we will use that value as the second input for the program. 
+case by checking the memory at that location when we successfully exit the loop. That will give us our second expected input.
 
 So, how can we make this loop run *exactly* 15 times and land *exactly* on an index holding `0xF` to store in `input1`?
 
@@ -148,22 +147,21 @@ Let's look at the array again
 ![array in ghidra](/assets/CTF/CMU_BB/phase_5/array_in_ghidra.png)
 
 The formula for calculating `input1` in the while loop above is 
-essentially `array[0] + input1*4`, which indexes the array using pointer notation. 
+essentially a pointer to the start of `array` + `input1`*4, which indexes the array using pointer notation. 
 
-For example, if we pass in 0 for `input1`, our offset is 0 and `input1` would be == 0Ah. 
+For example, if we pass in 0 for `input1`, our offset is 0 and `input1` would be the first value of the array (0Ah). 
 
-Next calculation would be `array[0] + 10*4`, which would lead us to the 40th byte of this array. 
+Next calculation would be `array` + `40`, which would lead us to the 40th byte of this array. 
 
 The map looks like this
 ```
-
 input1 = 3 -> 7 -> B -> D -> 9 -> 4 -> 8 -> 0 -> A -> 1 -> 2 -> E -> 6 -> F
 counter	=0    1    2    3    4    5    6    7    8    9   10   11   12   13
 ```
 
-We need counter to == 15 when input1 == 15 (F) , thus we need to find an input that can direct us to 3 for the second value of the map
+To pass this case, counter should == 15 when input1 == 15 (F) , so based on our above map, we need to find an input that can direct us to 3 for the second value of the map
 
-3 is located at index 48, so if this calculation is correct, initial input of 5 should take us to index 20, which is 12, which should then direct us to index 48, which is 3, and proceed with the rest of the stream, ending with input1 == F and count == F
+3 is located at index array[48], so if this calculation is correct, initial input of 5 should take us to array[20] which is 12, which should then direct us to array[48] which is 3, and proceed with the rest of the stream above, hopefully ending with input1 == F and count == F
 
 The correct stream should be 
 ```
@@ -197,9 +195,9 @@ Let's confirm `counter == 0xF` passes
 
 Wonderful. 
 
-Now that we know `input1 == 5` is the first key, the last step is to find out what `input2` should be. We can do this by viewing the memory of `local_174` after exiting the loop, since that's what `input2` should be.
+Now that we know `input1 == 5` is the first key, the last step is to find out what `input2` should be. This can be done by viewing the memory of `local_174` after exiting the loop, since that's what `input2` should be.
 
-Dumping the memory, we can see our initial input of '10' at `[rbp+84h]` is being compared with '0x73' at, or 115 in decimal at `[rbp+24h]`.
+Dumping the memory, we find our initial input of '10' at `[rbp+84h]` is being compared with '0x73' at, or 115 in decimal at `[rbp+24h]`.
 
 ![final cmp dd rbp+84](/assets/CTF/CMU_BB/phase_5/final_cmp_dd_rbp84_with_input2.png)
 
