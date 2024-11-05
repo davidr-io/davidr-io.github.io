@@ -2,9 +2,10 @@
 layout: post
 title: Footprinting Lab - Easy
 categories:
-- HackTheBox
+- hackthebox
 tags:
 - CTF
+- Easy
 pin: true
 image: "/assets/CTF/htb/binary.jpg"
 date: 2024-11-04 23:34 -0500
