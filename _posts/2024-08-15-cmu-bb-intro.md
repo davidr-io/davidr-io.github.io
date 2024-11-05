@@ -7,7 +7,7 @@ categories:
 tags:
 - reverse engineering
 - x86-64
-pin: true
+pin: false
 image: "/assets/CTF/CMU_BB/computer.jpg"
 date: 2024-08-15 23:19 -0400
 ---
