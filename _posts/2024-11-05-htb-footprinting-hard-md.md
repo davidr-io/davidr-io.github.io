@@ -18,7 +18,7 @@ The third server is an MX and management server for the internal network. Subseq
 ### Find HTB user credentials
 
 Let us begin with a basic nmap scan to get an idea of what services are running here
-![Initial scan](/assets/CTF/htb/footprinting/hard/first_scan.png)
+![Initial scan](/assets/CTF/htb/footprinting/hard/first_nmap.png)
 
 Aside from ssh, this box is running IMAP/POP3.
 
