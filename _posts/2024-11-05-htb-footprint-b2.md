@@ -6,7 +6,7 @@ categories:
 - medium
 tags:
 - CTF
-pin: true
+pin: false
 image: "/assets/CTF/htb/binary.jpg"
 date: 2024-11-04 23:34 -0500
 ---

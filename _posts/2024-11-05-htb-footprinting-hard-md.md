@@ -6,7 +6,7 @@ categories:
 - hard
 tags:
 - CTF
-pin: true
+pin: false
 image: "/assets/CTF/htb/binary.jpg"
 date: 2024-11-05 12:23 -0500
 ---
