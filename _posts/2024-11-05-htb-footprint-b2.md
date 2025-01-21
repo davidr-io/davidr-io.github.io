@@ -3,7 +3,7 @@ layout: post
 title: Footprinting Lab - Medium
 categories:
 - hackthebox
-- medium
+- CPTS-course
 tags:
 - CTF
 pin: false

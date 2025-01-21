@@ -3,7 +3,7 @@ layout: post
 title: Footprinting Lab - Hard
 categories:
 - hackthebox
-- hard
+- CPTS-course
 tags:
 - CTF
 pin: false
